@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <style>
+        .sty{
+            color: rgba(13, 80, 47, 0.829);
+            font-weight: bolder;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container-fluid" style="background-color: rgba(25, 211, 87, 0.987);">
+        <div class="row">
+            <div class="col-md-6 pt-2">
+                <div class="col-md-6 py-5 mx-auto">
+                    <nav class="navbar navbar-expand-lg navbar-light text-dark">
+                        <a class="navbar-brand navbar-light " style="font-weight: bolder" ; href="#">Food    Cart</a>
+                    </nav>
+                    <h2 style="font-weight: bolder;">Create your Food Cart account</h2>
+                    <form>
+                        <div class="form-group py-2">
+                          <label for="exampleInputText1" style="font-weight:bolder" id="" aria-required="true">Your Name</label>
+                          <input type="text" class="form-control" placeholder="John Doe" id="foodName" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group py-2">
+                          <label for="exampleInputPassword1" style="font-weight:bolder">E-mail</label>
+                          <input type="email" class="form-control py-2" placeholder="John@example.com" id="foodEmail">
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="exampleInputPassword1"  style="font-weight:bolder">Password</label>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" id="foodPassword"  placeholder="At least 8 characters" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            </div>
+                            <p id="printme"></p>
+                        </div>       
+                        <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input"id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">By creating an account on Food Cart,you agree to the
+                            <a class="sty">terms and condition</a>
+                          </label>                          
+                        </div>                   
+                        <button type="button" onclick="foodTodo()" class="btn btn-block text-white py-3" style="background-color: rgba(13, 80, 47, 0.829)">Create Food Cart account</button>
+                    </form>
+                    <p class="pt-2 text-center">Already have an account? <a href="C:\Users\HP\Documents\Front end\Project\foodfetchersignin.html" style="color: rgba(13, 80, 47, 0.829)">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        // function foodTodo() {
+            
+        //     if (password =='' || email == '' || name == '') {
+        //     alert("Fill the form completely")    
+        //     }
+        //     if (password.length >= 8) {
+        //     result.innerHTML = 'Password is very strong';
+        //     }
+        //     if (password.length < 8) {
+        //     result.innerHTML = 'Password is weak';
+        //     }
+        // }
+
+        function foodTodo() {
+            let name = document.getElementById('foodName').value;
+            let password = document.getElementById('foodPassword').value;
+            let email = document.getElementById('foodEmail').value;
+            let terms = document.getElementById('exampleCheck1').value;
+            let result = document.getElementById('printme');
+            
+            if (password =='' || email == '' || name == '' || terms == '') {
+            alert("Fill the form completely")    
+            }
+            if (password.length >= 8) {
+            result.innerHTML = 'Password is very strong';
+            }
+            if (password.length < 8) {
+            result.innerHTML = 'Password is weak';
+            }
+            // if (terms === '') {
+            //     alert('Accept terms and condition')
+            // }
+            else{
+                let foodTT = {
+                    idno : Math.floor(Math.random() * 10000),
+                    name : document.getElementById('foodName').value,
+                    password : document.getElementById('foodPassword').value,
+                    email : document.getElementById('foodEmail').value,
+                }
+                let storeFood = localStorage.getItem('store');
+                let foodArray = [];
+                if (storeFood == null) {
+                    foodArray.push(foodTT)
+                }
+                else{
+                    foodArray = JSON.parse(storeFood)
+                    if (foodArray.some(el => el.email == foodTT.email)) {
+                        return alert('Email already exist')
+                    }
+                    foodArray.push(foodTT)
+                }
+                localStorage.setItem('store', JSON.stringify(foodArray))
+                window.location.assign('foodfetchersignin.html')
+            }
+           
+                // let foodTT ={
+                //     idno: Math.floor(Math.random() * 10000),
+                //     name: document.getElementById('foodName').value,
+                //     email: document.getElementById('foodEmail').value,
+                //     pass: document.getElementById('foodPassword').value,
+
+                // }
+                // let storeFood = localStorage.getItem('cupBoard')
+                // let foodArray = [];
+                // if (storeFood ==null) {
+                //     foodArray.push(obj)
+                // }
+                // else{
+                //     foodArray = JSON.parse(localStorage.getItem('cupBoard'))
+                //     if (foodArray.some(el => el.email == obj.email)) {
+                //         return alert ('email already exist')
+                //     }
+
+                //     foodArray.push(obj)
+                // } 
+            
+
+                // localStorage.setItem('cupBoard', JSON.stringify(foodArray))
+                // window.location.assign("foodsignin.html")
+    }
+    </script>       
+</body>
+</html>
