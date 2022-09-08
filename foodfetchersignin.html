@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container-fluid" style="background-color: rgba(25, 211, 87, 0.987);">
+        <div class="col-md-6 pt-5 py-5">
+          <div class="col-md-8 mx-auto">
+          <h3 class="text-center" href="#" style="color: rgba(13, 80, 47, 0.829)" >Go to Foodcart website</h3>
+          <h5 class="py-4">Welcome back!</h5>
+          <i class="fa-solid fa-horizontal-rule"></i>
+          <form>
+              <div class="form-group py-3">
+                <label for="exampleInputEmail1">Email Address/Username</label>
+                <input type="email" class="form-control " id="foodEmail" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group py-3">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="foodPw">
+                
+              </div>
+              <div class="form-check py-2">
+                <a class="form-check-label" style="color: rgba(13, 80, 47, 0.829)"; for="exampleCheck1">Forget Password?</a>
+              </div>
+              <button type="button" onclick="foodTodo()" class="btn btn-block py-2" style=" background-color: rgba(13, 80, 47, 0.829); color: white;">Login</button>
+            </form>
+            <a href="#" style="color: rgba(13, 80, 47, 0.829)">help@foodcart.ng</a>
+          </div>
+        </div> 
+  </div>
+
+  <script>
+    function foodTodo(){
+      email = document.getElementById('foodEmail').value
+      password = document.getElementById('foodPw').value
+      let foodData ={
+        email: document.getElementById('foodEmail').value,
+        password: document.getElementById('foodPw').value,
+      };
+      let userDetails = JSON.parse(localStorage.getItem('store'));
+      let object ={}
+
+      loginStatus = false
+
+      // console.log(userDetails);
+
+      userDetails.some(el => {
+        if(el.email == foodData.email && el.password == foodData.password) {
+          localStorage.setItem('foodLogin', JSON.stringify(el))
+          loginStatus = true
+          object = el
+          
+        }
+        
+        
+        if (loginStatus) {
+          window.location.assign('foodfetcher.html')
+        }
+
+        else{
+          alert('Incorrect Username or Password')
+        }
+      })
+      
+    }
+  </script>
+
+</body>
+</html>
